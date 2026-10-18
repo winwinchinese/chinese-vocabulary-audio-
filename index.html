@@ -59,6 +59,23 @@ button {
 </head>
 <body>
 <h1>🌸 中文互动词卡</h1>
+  <div style="padding:20px; font-size:20px; ">
+<h2>
+中文点读练习</h2>
+<p>你好
+<button onclick="speakChinese（'你女
+<p>谢谢
+‹button onclick="speakChinese('#
+<p>再见
+‹button onclick="speakChinese|'#!
+</div>
+<script>
+function speakChinese (word) {
+const utterance = new SpeechSynthesisUtte
+utterance. lang = 'zh-CN';
+speechSynthesis.speak(utterance) ;
+｝
+</script>
 <p>点击小喇叭，学习普通话发音！</p>
 <div class="cards" id="cards"></div>
 
