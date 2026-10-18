@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>中文互动词卡</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #fff8f0;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+h1 {
+  color: #a74732;
+}
+p {
+  color: #666;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 18px 8px;
+  box-shadow: 0 2px 8px #00000012;
+}
+.chinese {
+  font-size: 27px;
+  font-weight: bold;
+  color: #333;
+}
+.pinyin {
+  font-size: 15px;
+  color: #a74732;
+  margin: 8px;
+}
+.meaning {
+  font-size: 14px;
+  color: #666;
+}
+button {
+  margin-top: 10px;
+  border: none;
+  border-radius: 20px;
+  padding: 9px 18px;
+  background: #a74732;
+  color: white;
+  font-size: 16px;
+}
+</style>
+</head>
+<body>
+<h1>🌸 中文互动词卡</h1>
+<p>点击小喇叭，学习普通话发音！</p>
+<div class="cards" id="cards"></div>
+
+<script>
+const words = [
+  ["你好", "nǐ hǎo", "Hello"],
+  ["谢谢", "xiè xie", "Thank you"],
+  ["再见", "zài jiàn", "Goodbye"],
+  ["中国", "Zhōng guó", "China"],
+  ["学习", "xué xí", "Study"],
+  ["朋友", "péng you", "Friend"],
+  ["老师", "lǎo shī", "Teacher"],
+  ["喜欢", "xǐ huan", "Like"],
+  ["中文", "Zhōng wén", "Chinese"],
+];
+
+const container = document.getElementById("cards");
+
+words.forEach(word => {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `
+    <div class="chinese">${word[0]}</div>
+    <div class="pinyin">${word[1]}</div>
+    <div class="meaning">${word[2]}</div>
+    <button type="button">🔊 听发音</button>
+  `;
+  card.querySelector("button").addEventListener("click", () => {
+    if (!("speechSynthesis" in window)) {
+      alert("请使用支持语音播放的浏览器打开网页。");
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const speech = new SpeechSynthesisUtterance(word[0]);
+    speech.lang = "zh-CN";
+    speech.rate = 0.8;
+    window.speechSynthesis.speak(speech);
+  });
+  container.appendChild(card);
+});
+</script>
+</body>
+</html>
